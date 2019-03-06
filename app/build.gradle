@@ -24,6 +24,7 @@ android {
         }
 
     }
+
     buildTypes {
         debug {
             debuggable true
@@ -34,10 +35,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
-
 }
 
 dependencies {
