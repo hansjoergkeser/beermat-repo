@@ -78,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun calculateAndDisplayTotalPrice(beerCount: Int): Int {
         val itemPriceInt = getItemPriceInt()
-        tv_total_price_of_line.text = NumberFormat.getCurrencyInstance(Locale.GERMANY).format(beerCount.toDouble() * itemPriceInt.toDouble() / 100)
+        tv_total_price_of_line.text = NumberFormat.getCurrencyInstance(Locale.GERMANY)
+            .format(beerCount.toDouble() * itemPriceInt.toDouble() / 100)
 
         return beerCount * itemPriceInt
     }
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     fun handleCurrentBeerCount(getEvent: BeermatGetEvent) {
         var tmpCount = getEvent.amountOfBeers
         if (getEvent.increasedCount) tmpCount++ else if (!getEvent.increasedCount && tmpCount == 0) tmpCount =
-                0 else tmpCount--
+            0 else tmpCount--
         BeerRepository(this).updateBeerCount(tmpCount, getEvent.increasedCount)
         Timber.d("handleCurrentBeerCount() finished. Beermat get action finished.")
     }
@@ -114,7 +115,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             tv_beer_count.text = initialGetEvent.amountOfBeers.toString()
             et_price.setText(NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.price / 100))
-            tv_total_price_of_line.text = NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.totalPrice / 100)
+            tv_total_price_of_line.text =
+                NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.totalPrice / 100)
         }
         Timber.d("handleBeermatInitialGetEvent() finished")
     }

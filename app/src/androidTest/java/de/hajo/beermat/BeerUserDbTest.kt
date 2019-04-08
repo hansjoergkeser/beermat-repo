@@ -15,7 +15,7 @@ import org.junit.Test
  * @author hansjoerg.keser
  * @since 26.11.18
  */
-class Beermat {
+class BeerUserDbTest {
 
     private lateinit var userDao: UserDao
     private lateinit var db: BeerDatabase
@@ -36,10 +36,10 @@ class Beermat {
 
     @Test
     fun writeUserAndReadInList() {
-        val user = User("Hajooo", "Cheddar")
-        userDao.insertUser(user)
-        val byName = userDao.findByName("Hajooo", "Cheddar")
-        assertEquals(user.email, byName.email)
+        val userToBeInserted = User("Hajooo", "Cheddar")
+        userDao.insertUser(userToBeInserted)
+        val savedUser = userDao.findByName("", "")
+        assertEquals(userToBeInserted.email, savedUser.email)
     }
 
     @Test
