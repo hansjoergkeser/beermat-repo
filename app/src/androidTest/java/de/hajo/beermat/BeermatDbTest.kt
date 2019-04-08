@@ -1,7 +1,8 @@
 package de.hajo.beermat
 
+import android.content.Context
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import de.hajo.beermat.database.BeerDatabase
 import de.hajo.beermat.database.BeermatDao
 import de.hajo.beermat.model.Beermat
@@ -21,7 +22,7 @@ class BeermatDbTest {
 
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getTargetContext()
+        val context = getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, BeerDatabase::class.java)
             .build()
         beermatDao = db.beerDao()

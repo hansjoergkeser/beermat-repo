@@ -1,14 +1,9 @@
 package de.hajo.beermat
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.clearText
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.doubleClick
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -24,7 +19,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class FirstEspTest {
+class MainActivityEspTests {
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
@@ -37,6 +32,7 @@ class FirstEspTest {
 
     @Test
     fun assertTotalPriceOfThreeBeers() {
+        // TODO: reset app before start
         onView(withId(R.id.tv_beer)).check(matches(isDisplayed()))
         onView(withId(R.id.et_price)).perform(click()).perform(clearText()).perform(typeText("2.99"))
         onView(withId(R.id.button_add)).perform(doubleClick())
