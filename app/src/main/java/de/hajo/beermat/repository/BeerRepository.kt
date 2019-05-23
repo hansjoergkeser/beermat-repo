@@ -18,73 +18,73 @@ import org.greenrobot.eventbus.EventBus
  */
 class BeerRepository(val context: Context) {
 
-    fun getBeerDatabase() = BeerDatabase.getInstance(context)
+	fun getBeerDatabase() = BeerDatabase.getInstance(context)
 
-    fun closeDatabase() {
-        getBeerDatabase().close()
-    }
+	fun closeDatabase() {
+		getBeerDatabase().close()
+	}
 
-    // TODO: use kotlin coroutines' launch() instead
-    @SuppressLint("StaticFieldLeak")
-    fun createDefaultBeermat() {
-        object : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg voids: Void): Void? {
-                getBeerDatabase().beerDao().deleteAll()
-                getBeerDatabase().beerDao().insert(Beermat(1, 300, 300))
-                EventBus.getDefault().post(BeermatCreationEvent())
-                return null
-            }
-        }.execute()
-    }
+	// TODO: use kotlin coroutines' launch() instead
+	@SuppressLint("StaticFieldLeak")
+	fun createDefaultBeermat() {
+		object : AsyncTask<Void, Void, Void>() {
+			override fun doInBackground(vararg voids: Void): Void? {
+				getBeerDatabase().beerDao().deleteAll()
+				getBeerDatabase().beerDao().insert(Beermat(1, 300, 300))
+				EventBus.getDefault().post(BeermatCreationEvent())
+				return null
+			}
+		}.execute()
+	}
 
-    @SuppressLint("StaticFieldLeak")
-    fun getInitialBeermatState() {
-        object : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg voids: Void): Void? {
-                val amountOfBeers = getBeerDatabase().beerDao().getAmount()
-                val price = getBeerDatabase().beerDao().getPrice()
-                val totalPrice = getBeerDatabase().beerDao().getTotalPrice()
-                EventBus.getDefault().post(BeermatInitialGetEvent(amountOfBeers, price, totalPrice))
-                return null
-            }
-        }.execute()
-    }
+	@SuppressLint("StaticFieldLeak")
+	fun getInitialBeermatState() {
+		object : AsyncTask<Void, Void, Void>() {
+			override fun doInBackground(vararg voids: Void): Void? {
+				val amountOfBeers = getBeerDatabase().beerDao().getAmount()
+				val price = getBeerDatabase().beerDao().getPrice()
+				val totalPrice = getBeerDatabase().beerDao().getTotalPrice()
+				EventBus.getDefault().post(BeermatInitialGetEvent(amountOfBeers, price, totalPrice))
+				return null
+			}
+		}.execute()
+	}
 
-    @SuppressLint("StaticFieldLeak")
-    fun getBeerAmount(increasedCount: Boolean) {
-        object : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg voids: Void): Void? {
-                val amountOfBeers = getBeerDatabase().beerDao().getAmount()
-                EventBus.getDefault().post(BeermatGetEvent(amountOfBeers, increasedCount))
-                return null
-            }
-        }.execute()
-    }
+	@SuppressLint("StaticFieldLeak")
+	fun getBeerAmount(increasedCount: Boolean) {
+		object : AsyncTask<Void, Void, Void>() {
+			override fun doInBackground(vararg voids: Void): Void? {
+				val amountOfBeers = getBeerDatabase().beerDao().getAmount()
+				EventBus.getDefault().post(BeermatGetEvent(amountOfBeers, increasedCount))
+				return null
+			}
+		}.execute()
+	}
 
-    @SuppressLint("StaticFieldLeak")
-    fun updateBeerCount(newCount: Int, increasedCount: Boolean) {
-        object : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg voids: Void): Void? {
-                getBeerDatabase().beerDao().updateAmount(newCount)
-                EventBus.getDefault().post(BeermatUpdateEvent(newCount, increasedCount))
-                return null
-            }
-        }.execute()
-    }
+	@SuppressLint("StaticFieldLeak")
+	fun updateBeerCount(newCount: Int, increasedCount: Boolean) {
+		object : AsyncTask<Void, Void, Void>() {
+			override fun doInBackground(vararg voids: Void): Void? {
+				getBeerDatabase().beerDao().updateAmount(newCount)
+				EventBus.getDefault().post(BeermatUpdateEvent(newCount, increasedCount))
+				return null
+			}
+		}.execute()
+	}
 
-    @SuppressLint("StaticFieldLeak")
-    fun updateBeerPriceAndTotalPrice(newPrice: Int, newTotalPrice: Int) {
-        object : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg voids: Void): Void? {
-                getBeerDatabase().beerDao().updatePrice(newPrice)
-                getBeerDatabase().beerDao().updateTotalPrice(newTotalPrice)
-                return null
-            }
-        }.execute()
-    }
+	@SuppressLint("StaticFieldLeak")
+	fun updateBeerPriceAndTotalPrice(newPrice: Int, newTotalPrice: Int) {
+		object : AsyncTask<Void, Void, Void>() {
+			override fun doInBackground(vararg voids: Void): Void? {
+				getBeerDatabase().beerDao().updatePrice(newPrice)
+				getBeerDatabase().beerDao().updateTotalPrice(newTotalPrice)
+				return null
+			}
+		}.execute()
+	}
 
-    fun insertUser(user: User) {
-        getBeerDatabase().userDao().insertUser(user)
-    }
+	fun insertUser(user: User) {
+		getBeerDatabase().userDao().insertUser(user)
+	}
 
 }

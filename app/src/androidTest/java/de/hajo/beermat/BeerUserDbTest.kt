@@ -17,38 +17,38 @@ import org.junit.Test
  */
 class BeerUserDbTest {
 
-    private lateinit var userDao: UserDao
-    private lateinit var db: BeerDatabase
+	private lateinit var userDao: UserDao
+	private lateinit var db: BeerDatabase
 
-    @Before
-    fun createDb() {
+	@Before
+	fun createDb() {
 		val context = getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, BeerDatabase::class.java)
-            .build()
-        userDao = db.userDao()
-    }
+		db = Room.inMemoryDatabaseBuilder(context, BeerDatabase::class.java)
+				.build()
+		userDao = db.userDao()
+	}
 
-    @After
-    fun closeDb() {
-        db.clearAllTables()
-        db.close()
-    }
+	@After
+	fun closeDb() {
+		db.clearAllTables()
+		db.close()
+	}
 
-    @Test
-    fun writeUserAndReadInList() {
-        val userToBeInserted = User("Hajooo", "Cheddar")
-        userDao.insertUser(userToBeInserted)
-        val savedUser = userDao.findByName("", "")
-        assertEquals(userToBeInserted.email, savedUser.email)
-    }
+	@Test
+	fun writeUserAndReadInList() {
+		val userToBeInserted = User("Hajooo", "Cheddar")
+		userDao.insertUser(userToBeInserted)
+		val savedUser = userDao.findByName("", "")
+		assertEquals(userToBeInserted.email, savedUser.email)
+	}
 
-    @Test
-    fun deleteUser() {
-        val user = User("hajo@cheese.de", "Gouda")
-        userDao.insertUser(user)
-        userDao.deleteUser(user)
-        val byName = userDao.findByName("Hajö", "Gouda")
-        assertEquals("User has not been deleted.", null, byName)
-    }
+	@Test
+	fun deleteUser() {
+		val user = User("hajo@cheese.de", "Gouda")
+		userDao.insertUser(user)
+		userDao.deleteUser(user)
+		val byName = userDao.findByName("Hajö", "Gouda")
+		assertEquals("User has not been deleted.", null, byName)
+	}
 
 }

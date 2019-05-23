@@ -10,16 +10,16 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class Beermat(
-    @ColumnInfo(name = "amount")
-    var amount: Int = 0,
+		@ColumnInfo(name = "amount")
+		var amount: Int = 0,
 
-    @ColumnInfo(name = "price")
-    var price: Int = 0,
+		@ColumnInfo(name = "price")
+		var price: Int = 0,
 
-    @ColumnInfo(name = "total_price")
-    var totalPrice: Int = 0
+		@ColumnInfo(name = "total_price")
+		var totalPrice: Int = 0
 ) {
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+	@ColumnInfo(name = "id")
+	@PrimaryKey(autoGenerate = true)
+	var id: Int = 0
 }

@@ -1,6 +1,10 @@
 package de.hajo.beermat.database
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import de.hajo.beermat.model.User
 
 /**
