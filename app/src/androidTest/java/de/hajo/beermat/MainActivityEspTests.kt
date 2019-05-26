@@ -2,7 +2,6 @@ package de.hajo.beermat
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.util.Log
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.clearText
 import androidx.test.espresso.action.ViewActions.click
@@ -22,6 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import timber.log.Timber
 import java.util.Locale
 
 
@@ -64,7 +64,7 @@ class MainActivityEspTests {
 	}
 
 	private fun takeScreenshot(parentFolderPath: String = "", screenShotName: String) {
-		Log.d("Screenshots", "Taking screenshot of '$screenShotName'")
+		Timber.i("Taking screenshot of '$screenShotName'")
 		val screenCapture = Screenshot.capture()
 		val processors = setOf(ScreenCaptureProcessor(parentFolderPath))
 
@@ -72,7 +72,7 @@ class MainActivityEspTests {
 			name = screenShotName
 			process(processors)
 		}
-		Log.d("Espresso-Screenshots", "Screenshot: [$screenShotName] taken and saved in directory: [$parentFolderPath]")
+		Timber.i("Screenshot: [$screenShotName] taken and saved in directory: [$parentFolderPath]")
 	}
 
 }
