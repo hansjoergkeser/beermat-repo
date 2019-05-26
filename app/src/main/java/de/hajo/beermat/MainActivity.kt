@@ -15,15 +15,18 @@ import de.hajo.beermat.events.BeermatGetEvent
 import de.hajo.beermat.events.BeermatInitialGetEvent
 import de.hajo.beermat.events.BeermatUpdateEvent
 import de.hajo.beermat.repository.BeerRepository
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.activity_main.fab
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.content_main.et_price
+import kotlinx.android.synthetic.main.content_main.tv_beer_count
+import kotlinx.android.synthetic.main.content_main.tv_total_price_of_line
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPermissions() {
         val permission = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
         if (permission != PackageManager.PERMISSION_GRANTED) {
             Timber.i("Permission to record denied")
@@ -57,15 +60,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeRequest() {
         ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            1
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
         )
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<String>, grantResults: IntArray
     ) {
         when (requestCode) {
             1 -> {
@@ -119,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     private fun calculateAndDisplayTotalPrice(beerCount: Int): Int {
         val itemPriceInt = getItemPriceInt()
         tv_total_price_of_line.text = NumberFormat.getCurrencyInstance(Locale.GERMANY)
-            .format(beerCount.toDouble() * itemPriceInt.toDouble() / 100)
+                .format(beerCount.toDouble() * itemPriceInt.toDouble() / 100)
 
         return beerCount * itemPriceInt
     }
@@ -133,7 +136,7 @@ class MainActivity : AppCompatActivity() {
     fun handleCurrentBeerCount(getEvent: BeermatGetEvent) {
         var tmpCount = getEvent.amountOfBeers
         if (getEvent.increasedCount) tmpCount++ else if (!getEvent.increasedCount && tmpCount == 0) tmpCount =
-            0 else tmpCount--
+                0 else tmpCount--
         BeerRepository(this).updateBeerCount(tmpCount, getEvent.increasedCount)
         Timber.d("handleCurrentBeerCount() finished. Beermat get action finished.")
     }
@@ -156,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             tv_beer_count.text = initialGetEvent.amountOfBeers.toString()
             et_price.setText(NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.price / 100))
             tv_total_price_of_line.text =
-                NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.totalPrice / 100)
+                    NumberFormat.getCurrencyInstance(Locale.GERMANY).format(initialGetEvent.totalPrice / 100)
         }
         Timber.d("handleBeermatInitialGetEvent() finished")
     }
@@ -215,7 +218,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSnackbarMessage(shortText: String) {
         Snackbar.make(findViewById(android.R.id.content), shortText, Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
+                .setAction("Action", null).show()
     }
 
 }
