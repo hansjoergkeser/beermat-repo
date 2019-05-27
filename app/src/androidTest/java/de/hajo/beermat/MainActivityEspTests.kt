@@ -24,6 +24,7 @@ import org.junit.runner.RunWith
 import timber.log.Timber
 import java.util.Locale
 
+
 /**
  * @author hansjoerg.keser
  * @since 26.01.19
@@ -41,7 +42,10 @@ class MainActivityEspTests {
 			.around(activityRule)
 
 	@After
-	fun makeScreenshotAfterwards() {
+	fun makeScreenshotAndResetApp() {
+		// using test orchestrator to reset the app
+		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
+
 		val parentFolderPath = "espresso-screenshots/"
 		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = "test-screenshot")
 	}
@@ -54,7 +58,6 @@ class MainActivityEspTests {
 
 	@Test
 	fun assertTotalPriceOfThreeBeers() {
-		// TODO: reset app before start
 		onView(withId(R.id.tv_beer)).check(matches(isDisplayed()))
 		onView(withId(R.id.et_price)).perform(click()).perform(clearText()).perform(typeText("2.99"))
 		onView(withId(R.id.button_add)).perform(doubleClick())
