@@ -24,7 +24,6 @@ import org.junit.runner.RunWith
 import timber.log.Timber
 import java.util.Locale
 
-
 /**
  * @author hansjoerg.keser
  * @since 26.01.19
