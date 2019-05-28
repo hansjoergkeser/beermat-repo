@@ -1,10 +1,10 @@
-package de.hajo.beermat
+package de.hajo.beermat.screenshots
 
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-import java.util.Locale
+import java.util.*
 
 /**
  *  @author hansjoerg.keser

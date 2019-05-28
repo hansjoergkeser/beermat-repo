@@ -1,4 +1,4 @@
-package de.hajo.beermat
+package de.hajo.beermat.screenshots
 
 import android.os.Environment.DIRECTORY_PICTURES
 import android.os.Environment.getExternalStoragePublicDirectory
