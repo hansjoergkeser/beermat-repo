@@ -4,7 +4,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-import java.util.*
+import java.util.Locale
 
 /**
  *  @author hansjoerg.keser

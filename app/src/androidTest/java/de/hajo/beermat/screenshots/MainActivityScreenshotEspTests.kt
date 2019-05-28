@@ -12,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.screenshot.Screenshot
@@ -58,8 +59,11 @@ class MainActivityScreenshotEspTests {
 		// using test orchestrator to reset the app
 		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
 
-		val parentFolderPath = "espresso-screenshots/"
-		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName)
+		val parentFolderPath = "espresso/"
+
+		val currentLocale = InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
+
+		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName + currentLocale)
 	}
 
 	@Test
@@ -86,7 +90,7 @@ class MainActivityScreenshotEspTests {
 			name = screenShotName
 			process(processors)
 		}
-		Timber.i("Screenshot: [$screenShotName] taken and saved in directory: [$parentFolderPath]")
+		Timber.i("Screenshot: [$screenShotName] taken and saved in directory: [$parentFolderPath] on device external storage.")
 	}
 
 }
