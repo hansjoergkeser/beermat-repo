@@ -24,7 +24,6 @@ import org.junit.runner.RunWith
 import timber.log.Timber
 import java.util.Locale
 
-
 /**
  * @author hansjoerg.keser
  * @since 26.01.19
@@ -32,7 +31,8 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class MainActivityEspTests {
 
-	private val localeRule = LocaleRule(Locale("en"))
+	// TODO: add locales
+	private val localeRule = LocaleRule(Locale("de"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 
