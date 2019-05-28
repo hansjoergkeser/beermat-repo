@@ -30,12 +30,12 @@ import java.util.Locale
  *  @author hansjoerg.keser
  *  @since 2019-05-28
  *
- * execute certain tests in terminal:
- * ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
- * https://github.com/googlesamples/android-testing-templates/blob/master/AndroidTestingBlueprint/README.md#custom-gradle-command-line-arguments
+ *  execute certain tests in terminal:
+ *  ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
+ *  https://github.com/googlesamples/android-testing-templates/blob/master/AndroidTestingBlueprint/README.md#custom-gradle-command-line-arguments
  *
- * if you execute the tests via IDE without the task connectedDebugAndroidTest (cAT) the screenshots are saved on device
- * but no report is generated under app/build/reports/androidTests/connected
+ *  if you execute the tests via IDE without the task connectedDebugAndroidTest (cAT) the screenshots are saved on device,
+ *  but no report is generated under app/build/reports/androidTests/connected
  */
 @RunWith(AndroidJUnit4::class)
 class MainActivityScreenshotEspTests {
