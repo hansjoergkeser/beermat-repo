@@ -22,6 +22,7 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
+import org.junit.rules.TestName
 import org.junit.runner.RunWith
 import timber.log.Timber
 import java.util.Locale
@@ -44,11 +45,13 @@ class MainActivityScreenshotEspTests {
 	private val localeRule = LocaleRule(Locale("de"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
+	private val testName = TestName()
 
 	@get:Rule
 	val mRuleChain: RuleChain = RuleChain.outerRule(localeRule)
 			.around(grantPermissionRule)
 			.around(activityRule)
+			.around(testName)
 
 	@After
 	fun makeScreenshotAndResetApp() {
@@ -56,7 +59,7 @@ class MainActivityScreenshotEspTests {
 		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
 
 		val parentFolderPath = "espresso-screenshots/"
-		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = "test-screenshot")
+		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName)
 	}
 
 	@Test
