@@ -82,17 +82,17 @@ def reportsDirectory = "$buildDir/reports/androidTests/connected"
 
 def clearScreenshotsTask = task('clearScreenshots', type: Exec) {
     executable "${android.getAdbExe().toString()}"
-    args 'shell', 'rm', '-r', '/sdcard/Pictures/my_app_folder'
+    args 'shell', 'rm', '-r', '/sdcard/Pictures/beermat-screenshots'
 }
 
 def createScreenshotDirectoryTask = task('createScreenshotDirectory', type: Exec, group: 'reporting') {
     executable "${android.getAdbExe().toString()}"
-    args 'shell', 'mkdir', '-p', '/sdcard/Pictures/my_app_folder'
+    args 'shell', 'mkdir', '-p', '/sdcard/Pictures/beermat-screenshots'
 }
 
 def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reporting') {
     executable "${android.getAdbExe().toString()}"
-    args 'pull', '/sdcard/Pictures/my_app_folder/.', reportsDirectory
+    args 'pull', '/sdcard/Pictures/beermat-screenshots/.', reportsDirectory
     finalizedBy {
         clearScreenshotsTask
     }

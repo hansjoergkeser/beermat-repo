@@ -6,14 +6,9 @@ import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.clearText
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.doubleClick
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
@@ -29,7 +24,7 @@ import org.junit.rules.RuleChain
 import org.junit.rules.TestName
 import org.junit.runner.RunWith
 import timber.log.Timber
-import java.util.Locale
+import java.util.*
 
 /**
  *  @author hansjoerg.keser
@@ -45,7 +40,7 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class MainActivityScreenshotEspTests {
 
-	private val localeRule = LocaleRule(Locale("de"), Locale("en"), Locale("es"))
+    private val localeRule = LocaleRule(Locale("de"), Locale("en"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 	private val testName = TestName()
