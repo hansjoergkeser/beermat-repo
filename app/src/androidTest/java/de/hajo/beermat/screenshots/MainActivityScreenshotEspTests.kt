@@ -45,8 +45,7 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class MainActivityScreenshotEspTests {
 
-	// TODO: add locales
-	private val localeRule = LocaleRule(Locale("de"))
+	private val localeRule = LocaleRule(Locale("de"), Locale("en"), Locale("es"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 	private val testName = TestName()
