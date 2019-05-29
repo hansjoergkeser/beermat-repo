@@ -17,7 +17,7 @@ class ScreenCaptureProcessor(parentFolderPath: String) : BasicScreenCaptureProce
 						getExternalStoragePublicDirectory(DIRECTORY_PICTURES),
 						"my_app_folder"
 				).absolutePath,
-				"screenshots/$parentFolderPath"
+				"espresso-screenshots/$parentFolderPath"
 		)
 	}
 

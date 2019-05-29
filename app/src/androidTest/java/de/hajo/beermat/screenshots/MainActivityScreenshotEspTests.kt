@@ -2,6 +2,9 @@ package de.hajo.beermat.screenshots
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.Context
+import android.graphics.Point
+import android.view.WindowManager
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.clearText
 import androidx.test.espresso.action.ViewActions.click
@@ -55,25 +58,35 @@ class MainActivityScreenshotEspTests {
 			.around(testName)
 
 	@After
-	fun makeScreenshotAndResetApp() {
+	fun createDirAndMakeScreenshot() {
 		// using test orchestrator to reset the app
 		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
 
-		val parentFolderPath = "espresso/"
+		var deviceType = "unknown"
+		val wm = InstrumentationRegistry.getInstrumentation().targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+		val displayDimensions = Point()
+		wm.defaultDisplay.getRealSize(displayDimensions)
+
+		when ("" + displayDimensions.y + "x" + displayDimensions.x) {
+			"1920x1080" -> deviceType = "phone"
+			"1200x1920" -> deviceType = "tablet-7"
+			"1536x2048" -> deviceType = "tablet-9"
+		}
 
 		val currentLocale = InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
+		val parentFolderPath = "$deviceType/$currentLocale"
 
-		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName + currentLocale)
+		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName)
 	}
 
 	@Test
-	fun assertButtons() {
+	fun `00`() {
 		onView(withId(R.id.button_add)).check(matches(isDisplayed()))
 		onView(withId(R.id.button_reduce)).check(matches(isDisplayed()))
 	}
 
 	@Test
-	fun assertTotalPriceOfThreeBeers() {
+	fun `01`() {
 		onView(withId(R.id.tv_beer)).check(matches(isDisplayed()))
 		onView(withId(R.id.et_price)).perform(click()).perform(clearText()).perform(typeText("2.99"))
 		onView(withId(R.id.button_add)).perform(doubleClick())
