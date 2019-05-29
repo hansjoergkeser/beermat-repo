@@ -6,9 +6,14 @@ import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.clearText
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.doubleClick
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
@@ -24,14 +29,14 @@ import org.junit.rules.RuleChain
 import org.junit.rules.TestName
 import org.junit.runner.RunWith
 import timber.log.Timber
-import java.util.*
+import java.util.Locale
 
 /**
  *  @author hansjoerg.keser
  *  @since 2019-05-28
  *
  *  execute certain tests in terminal:
- *  ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
+ *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
  *  https://github.com/googlesamples/android-testing-templates/blob/master/AndroidTestingBlueprint/README.md#custom-gradle-command-line-arguments
  *
  *  if you execute the tests via IDE without the task connectedDebugAndroidTest (cAT) the screenshots are saved on device,
@@ -40,7 +45,7 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class MainActivityScreenshotEspTests {
 
-    private val localeRule = LocaleRule(Locale("de"), Locale("en"))
+	private val localeRule = LocaleRule(Locale("de"), Locale("en"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 	private val testName = TestName()
@@ -57,7 +62,8 @@ class MainActivityScreenshotEspTests {
 		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
 
 		var deviceType = "unknown"
-		val wm = InstrumentationRegistry.getInstrumentation().targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+		val wm =
+				InstrumentationRegistry.getInstrumentation().targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 		val displayDimensions = Point()
 		wm.defaultDisplay.getRealSize(displayDimensions)
 
@@ -67,7 +73,8 @@ class MainActivityScreenshotEspTests {
 			"1536x2048" -> deviceType = "tablet-9"
 		}
 
-		val currentLocale = InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
+		val currentLocale =
+				InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
 		val parentFolderPath = "$deviceType/$currentLocale"
 
 		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName)

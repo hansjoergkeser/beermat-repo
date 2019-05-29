@@ -15,7 +15,7 @@ class ScreenCaptureProcessor(parentFolderPath: String) : BasicScreenCaptureProce
 		this.mDefaultScreenshotPath = File(
 				File(
 						getExternalStoragePublicDirectory(DIRECTORY_PICTURES),
-					"beermat-screenshots"
+						"beermat-screenshots"
 				).absolutePath,
 				"espresso-screenshots/$parentFolderPath"
 		)
