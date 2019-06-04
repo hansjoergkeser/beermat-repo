@@ -104,22 +104,11 @@ def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reportin
     doFirst {
         new File(reportsDirectory).mkdirs()
     }
-
-    doLast {
-        exec {
-            println("\nExecuting disableDemoMode")
-            commandLine 'sh', './disableDemoMode.sh'
-        }
-    }
 }
 
 tasks.whenTaskAdded { task ->
 // this task (cAT) generates the report in output -> https://developer.android.com/studio/test/command-line
     if (task.name == 'connectedDebugAndroidTest') {
-        exec {
-            println("\nExecuting enableDemoMode")
-            commandLine 'sh', './enableDemoMode.sh'
-        }
         task.finalizedBy {
             fetchScreenshotsTask
         }
