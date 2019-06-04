@@ -84,6 +84,7 @@ class MainActivityScreenshotEspTests {
 
 	@Test
 	fun `00`() {
+		Thread.sleep(500)
 		onView(withId(R.id.button_add)).check(matches(isDisplayed()))
 		onView(withId(R.id.button_reduce)).check(matches(isDisplayed()))
 	}
