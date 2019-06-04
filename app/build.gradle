@@ -91,6 +91,7 @@ def createScreenshotDirectoryTask = task('createScreenshotDirectory', type: Exec
 }
 
 def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reporting') {
+
     executable "${android.getAdbExe().toString()}"
     args 'pull', '/sdcard/Pictures/beermat-screenshots/.', reportsDirectory
     finalizedBy {
@@ -104,11 +105,22 @@ def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reportin
     doFirst {
         new File(reportsDirectory).mkdirs()
     }
+
+    doLast {
+        exec {
+            println("\nExecuting disableDemoMode")
+            commandLine 'sh', './disableDemoMode.sh'
+        }
+    }
 }
 
 tasks.whenTaskAdded { task ->
 // this task generates report in output -> https://developer.android.com/studio/test/command-line
     if (task.name == 'connectedDebugAndroidTest') {
+        exec {
+            println("\nExecuting enableDemoMode")
+            commandLine 'sh', './enableDemoMode.sh'
+        }
         task.finalizedBy {
             fetchScreenshotsTask
         }
