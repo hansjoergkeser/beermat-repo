@@ -117,6 +117,10 @@ tasks.whenTaskAdded { task ->
 // this task generates the report in output -> https://developer.android.com/studio/test/command-line
     if (task.name == 'connectedDebugAndroidTest') {
         exec {
+            println("\nExecuting createEmulators.sh")
+            commandLine 'sh', './createEmulators.sh'
+        }
+        exec {
             println("\nExecuting enableDemoMode")
             commandLine 'sh', './enableDemoMode.sh'
         }
