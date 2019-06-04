@@ -91,7 +91,6 @@ def createScreenshotDirectoryTask = task('createScreenshotDirectory', type: Exec
 }
 
 def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reporting') {
-
     executable "${android.getAdbExe().toString()}"
     args 'pull', '/sdcard/Pictures/beermat-screenshots/.', reportsDirectory
     finalizedBy {
