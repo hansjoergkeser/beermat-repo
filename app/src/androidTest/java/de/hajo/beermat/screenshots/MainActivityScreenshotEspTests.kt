@@ -45,7 +45,7 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class MainActivityScreenshotEspTests {
 
-	private val localeRule = LocaleRule(Locale("de"), Locale("en"))
+	private val localeRule = LocaleRule(Locale("de"))
 	private val activityRule = ActivityTestRule(MainActivity::class.java)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 	private val testName = TestName()
@@ -76,8 +76,10 @@ class MainActivityScreenshotEspTests {
 		val currentLocale =
 				InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
 		val parentFolderPath = "$deviceType/$currentLocale"
+		val currentScreenShotName = testName.methodName
 
-		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = testName.methodName)
+		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = currentScreenShotName)
+		Timber.i("Screenshot: [$currentScreenShotName] taken and saved in directory: [$parentFolderPath] on device external storage.")
 	}
 
 	@Test
@@ -104,7 +106,6 @@ class MainActivityScreenshotEspTests {
 			name = screenShotName
 			process(processors)
 		}
-		Timber.i("Screenshot: [$screenShotName] taken and saved in directory: [$parentFolderPath] on device external storage.")
 	}
 
 }
