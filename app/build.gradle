@@ -102,7 +102,10 @@ def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reportin
     }
 
     doFirst {
-        new File(reportsDirectory).mkdirs()
+        def folder = new File(reportsDirectory)
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
     }
 }
 

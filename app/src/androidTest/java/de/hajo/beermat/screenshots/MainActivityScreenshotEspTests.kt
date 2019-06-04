@@ -35,11 +35,11 @@ import java.util.Locale
  *  @author hansjoerg.keser
  *  @since 2019-05-28
  *
- *  execute certain tests in terminal:
- *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
+ *  execute certain tests in terminal like this:
+ *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests.00
  *  https://github.com/googlesamples/android-testing-templates/blob/master/AndroidTestingBlueprint/README.md#custom-gradle-command-line-arguments
  *
- *  if you execute the tests via IDE without the task connectedDebugAndroidTest (cAT) the screenshots are saved on device,
+ *  if you execute the tests via IDE without the screenshotRunner.sh or the task connectedDebugAndroidTest (cAT) the screenshots are saved on device,
  *  but no report is generated under app/build/reports/androidTests/connected
  */
 @RunWith(AndroidJUnit4::class)
@@ -62,10 +62,10 @@ class MainActivityScreenshotEspTests {
 		// https://developer.android.com/training/testing/junit-runner#using-android-test-orchestrator
 
 		var deviceType = "unknown"
-		val wm =
+		val windowManager =
 				InstrumentationRegistry.getInstrumentation().targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 		val displayDimensions = Point()
-		wm.defaultDisplay.getRealSize(displayDimensions)
+		windowManager.defaultDisplay.getRealSize(displayDimensions)
 
 		when ("" + displayDimensions.y + "x" + displayDimensions.x) {
 			"1920x1080" -> deviceType = "phone"
@@ -89,7 +89,7 @@ class MainActivityScreenshotEspTests {
 		onView(withId(R.id.button_reduce)).check(matches(isDisplayed()))
 	}
 
-	@Test
+	//	@Test
 	fun `01`() {
 		onView(withId(R.id.tv_beer)).check(matches(isDisplayed()))
 		onView(withId(R.id.et_price)).perform(click()).perform(clearText()).perform(typeText("2.99"))
