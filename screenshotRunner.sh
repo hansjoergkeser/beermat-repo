@@ -45,8 +45,6 @@ do
     # Start tests
     ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
 
-    ./gradlew copyScreenshotReport
-
     # Disable demo mode
     adb shell am broadcast -a com.android.systemui.demo -e command exit
 

@@ -77,12 +77,25 @@ dependencies {
     androidTestUtil 'androidx.test:orchestrator:1.2.0'
 }
 
-// the screenshot process: create directories, save the screens, pull them to the project output and remove all screesn from device in the end
+// the screenshot process: create directories, save the screens, pull them to the project output and remove all screens from device in the end
 def reportsDirectory = "$buildDir/reports/androidTests/connected"
+
+task copyScreenshotReport {
+    doLast {
+        copy {
+            from "$buildDir/reports/androidTests/connected/espresso-screenshots"
+            into "$buildDir/espresso-screenshots"
+            println("XXX\nTask copyScreenshotReport finished")
+        }
+    }
+}
 
 def clearScreenshotsTask = task('clearScreenshots', type: Exec) {
     executable "${android.getAdbExe().toString()}"
     args 'shell', 'rm', '-r', '/sdcard/Pictures/beermat-screenshots'
+    finalizedBy {
+        copyScreenshotReport
+    }
 }
 
 def createScreenshotDirectoryTask = task('createScreenshotDirectory', type: Exec, group: 'reporting') {
@@ -114,18 +127,6 @@ tasks.whenTaskAdded { task ->
     if (task.name == 'connectedDebugAndroidTest') {
         task.finalizedBy {
             fetchScreenshotsTask
-        }
-    }
-}
-
-task copyScreenshotReport {
-    println("XXX\nNOTHING'S GOING ON!!!\nXXX")
-    doLast {
-        copy {
-            println("XXX\ncopyReportsDirForArchiving starting\nXXX")
-            from "$buildDir/reports/androidTests/connected/espresso-screenshots"
-            into "$buildDir/espresso-screenshots"
-            println("XXX\ncopyReportsDirForArchiving finished\nXXX")
         }
     }
 }
