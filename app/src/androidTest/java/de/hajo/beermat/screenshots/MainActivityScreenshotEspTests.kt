@@ -89,7 +89,7 @@ class MainActivityScreenshotEspTests {
 		onView(withId(R.id.button_reduce)).check(matches(isDisplayed()))
 	}
 
-	//	@Test
+	@Test
 	fun `01`() {
 		onView(withId(R.id.tv_beer)).check(matches(isDisplayed()))
 		onView(withId(R.id.et_price)).perform(click()).perform(clearText()).perform(typeText("2.99"))
