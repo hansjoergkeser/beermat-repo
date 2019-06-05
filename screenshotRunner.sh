@@ -27,7 +27,7 @@ do
     done
 
     # the Android OS still needs time, otherwise the following demo mode commands won't work
-    sleep 10
+    sleep 20
     echo "Emulator is ready now."
 
     # Start demo mode
