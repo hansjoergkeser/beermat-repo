@@ -81,6 +81,7 @@ dependencies {
 def reportsDirectory = "$buildDir/reports/androidTests/connected"
 
 task copyScreenshotReport {
+    // do nothing here, it will always be executed even during gradle clean, see https://docs.gradle.org/current/userguide/build_lifecycle.html
     doLast {
         copy {
             from "$buildDir/reports/androidTests/connected/espresso-screenshots"

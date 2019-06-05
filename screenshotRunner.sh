@@ -6,7 +6,7 @@ do
     # https://stackoverflow.com/a/44386974/3258117
     echo no | avdmanager create avd -f -n ${device} -k "system-images;android-28;google_apis;x86"
 
-    # Overwrite the config.ini of the just created emulator... to get the suitable nexus skin and resolution, etc.
+    # Overwrite the config.ini of the just created emulator... to get the suitable nexus skin with resolution, etc.
     cat ${device}-config.ini > ~/.android/avd/${device}.avd/config.ini
 
     # if avdmanager is not known, you need to set it as environment variable... or you could try this instead:
