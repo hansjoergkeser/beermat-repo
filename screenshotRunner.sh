@@ -1,4 +1,6 @@
 #!/bin/sh
+./gradlew clean
+
 for device in nexus5 nexus7 nexus9
 do
     # https://stackoverflow.com/a/44386974/3258117
@@ -15,14 +17,16 @@ do
     emulator -avd ${device} &
     adb wait-for-device
 
+    sleep 10
+
     # https://spin.atomicobject.com/2016/03/10/android-test-script/
     WAIT_CMD="adb wait-for-device shell getprop init.svc.bootanim"
     until ${WAIT_CMD} | grep -m 1 stopped; do
         echo "Waiting for emulator..."
-        sleep 1
+        sleep 2
     done
 
-    # Emulator still needs time, otherwise the following demo mode commands won't work
+    # the Android OS still needs time, otherwise the following demo mode commands won't work
     sleep 10
     echo "Emulator is ready now."
 
@@ -40,6 +44,8 @@ do
 
     # Start tests
     ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
+
+    ./gradlew copyScreenshotReport
 
     # Disable demo mode
     adb shell am broadcast -a com.android.systemui.demo -e command exit

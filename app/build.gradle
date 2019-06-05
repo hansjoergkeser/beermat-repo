@@ -117,3 +117,15 @@ tasks.whenTaskAdded { task ->
         }
     }
 }
+
+task copyScreenshotReport {
+    println("XXX\nNOTHING'S GOING ON!!!\nXXX")
+    doLast {
+        copy {
+            println("XXX\ncopyReportsDirForArchiving starting\nXXX")
+            from "$buildDir/reports/androidTests/connected/espresso-screenshots"
+            into "$buildDir/espresso-screenshots"
+            println("XXX\ncopyReportsDirForArchiving finished\nXXX")
+        }
+    }
+}
