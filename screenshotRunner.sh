@@ -10,7 +10,7 @@ do
     # echo no | ${ANDROID_HOME}/tools/bin/avdmanager create avd -f -n ${device} -k "system-images;android-28;google_apis;x86"
     # echo no | ~/Library/Android/sdk/tools/bin/avdmanager create avd -f -n ${device} -k "system-images;android-28;google_apis;x86"
 
-    # Overwrite the config.ini of the just created emulator... to get the suitable nexus skin with resolution, etc.
+    # Overwrite the config.ini of the just created emulator... to get the correct nexus skin with suitable properties like resolution
     cat ${device}-config.ini > ~/.android/avd/${device}.avd/config.ini
 
     # Start the emulator
@@ -43,13 +43,14 @@ do
     adb shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100
 
     # Start tests
-    ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests
+    ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments=de.hajo.beermat.screenshots
 
     # Disable demo mode
     adb shell am broadcast -a com.android.systemui.demo -e command exit
 
     # https://gist.github.com/royclarkson/f39115fe0a7ac1f08630
-    adb devices | grep "emulator-" | while read -r emulator device; do
+    adb devices | grep "emulator-" | while read -r emulator device;
+    do
         adb -s ${emulator} emu kill
     done
 
