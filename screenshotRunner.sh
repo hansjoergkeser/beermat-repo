@@ -42,7 +42,7 @@ do
     # Show full battery but not in charging state
     adb shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100
 
-    # Start tests
+    # Start tests - see MainActivityScreenshotEspTests for further explanation
     ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.package=de.hajo.beermat.screenshots
 
     # Disable demo mode
