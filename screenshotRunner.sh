@@ -43,7 +43,7 @@ do
     adb shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100
 
     # Start tests
-    ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments=de.hajo.beermat.screenshots
+    ./gradlew cAT -Pandroid.testInstrumentationRunnerArguments.package=de.hajo.beermat.screenshots
 
     # Disable demo mode
     adb shell am broadcast -a com.android.systemui.demo -e command exit

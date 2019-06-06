@@ -22,7 +22,8 @@ import org.junit.runner.RunWith
  *  @since 2019-05-28
  *
  *  execute all screenshot tests in terminal:
- *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments=de.hajo.beermat.screenshots
+ *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.package=de.hajo.beermat.screenshots
+ *  https://developer.android.com/reference/android/support/test/runner/AndroidJUnitRunner.html -> Running all tests in a java package
  *
  *  execute certain tests in terminal like this:
  *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.MainActivityScreenshotEspTests.00
