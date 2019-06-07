@@ -9,5 +9,5 @@ Execute it with the screenshotRunner.sh in the project root dir.<br>
 E.g. in terminal with this command:<br>
 ./screenshotRunner.sh
 
-Don't be surprised, three emulators (nexus 5,7 and 9) will be started sequentially :-)<br>
+Don't be surprised, three emulators (nexus 5, 7 and 9) will be started sequentially :-)<br>
 Find the final report with all the screenshots in the app module under build/espresso-screenshots

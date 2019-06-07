@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
  *  but no report is generated under app/build/reports/androidTests/connected
  */
 @RunWith(AndroidJUnit4::class)
-class MainActivityScreenshotEspTests : ScreenshotEspSetup(ActivityTestRule(MainActivity::class.java)) {
+class MainActivityScreenshotEspTests : ScreenshotEspSetup<MainActivity>(ActivityTestRule(MainActivity::class.java)) {
 
 	@Test
 	fun `00`() {

@@ -2,6 +2,7 @@ package de.hajo.beermat.screenshots
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.Activity
 import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
@@ -20,7 +21,7 @@ import java.util.Locale
  *  @author hansjoerg.keser
  *  @since 2019-06-06
  */
-abstract class ScreenshotEspSetup(activityRule: ActivityTestRule<*>) {
+abstract class ScreenshotEspSetup<T : Activity>(activityRule: ActivityTestRule<T>) {
 
 	private val localeRule = LocaleRule(Locale("de"))
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)

@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
  *  ./gradlew clean cAT -Pandroid.testInstrumentationRunnerArguments.class=de.hajo.beermat.screenshots.LoginActivityScreenshotEspTests.02
  */
 @RunWith(AndroidJUnit4::class)
-class LoginActivityScreenshotEspTests : ScreenshotEspSetup(ActivityTestRule(LoginActivity::class.java)) {
+class LoginActivityScreenshotEspTests : ScreenshotEspSetup<LoginActivity>(ActivityTestRule(LoginActivity::class.java)) {
 
 	@Test
 	fun `02`() {
