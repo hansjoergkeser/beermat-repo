@@ -14,6 +14,7 @@ class LocaleRule(vararg locales: Locale) : TestRule {
 
 	private val mLocales: Array<out Locale> = locales
 	private var deviceLocale: Locale? = null
+	private var currentLocaleIndex = -1
 
 	/**
 	 * Modifies the method-running [Statement] to implement this
@@ -31,6 +32,7 @@ class LocaleRule(vararg locales: Locale) : TestRule {
 				try {
 					deviceLocale = Locale.getDefault()
 					for (locale in mLocales) {
+						currentLocaleIndex++
 						setLocale(locale)
 						base.evaluate()
 					}
@@ -42,6 +44,10 @@ class LocaleRule(vararg locales: Locale) : TestRule {
 				}
 			}
 		}
+	}
+
+	fun getLanguageOfCurrentLocale(): String {
+		return mLocales[currentLocaleIndex].language
 	}
 
 	private fun setLocale(locale: Locale) {

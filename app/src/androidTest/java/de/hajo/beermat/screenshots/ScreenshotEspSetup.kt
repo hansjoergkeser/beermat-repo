@@ -23,7 +23,7 @@ import java.util.Locale
  */
 abstract class ScreenshotEspSetup<T : Activity>(activityRule: ActivityTestRule<T>) {
 
-	private val localeRule = LocaleRule(Locale("de"))
+	private val localeRule = LocaleRule(Locale.GERMANY, Locale.UK)
 	private val grantPermissionRule = GrantPermissionRule.grant(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
 	private val testName = TestName()
 
@@ -50,9 +50,8 @@ abstract class ScreenshotEspSetup<T : Activity>(activityRule: ActivityTestRule<T
 			"1536x2048" -> deviceType = "tablet-9"
 		}
 
-		val currentLocale =
-				InstrumentationRegistry.getInstrumentation().targetContext.resources.configuration.locales[0]
-		val parentFolderPath = "$deviceType/$currentLocale"
+		val currentLanguage = localeRule.getLanguageOfCurrentLocale()
+		val parentFolderPath = "$deviceType/$currentLanguage"
 		val currentScreenShotName = testName.methodName
 
 		takeScreenshot(parentFolderPath = parentFolderPath, screenShotName = currentScreenShotName)
